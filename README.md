@@ -1,12 +1,12 @@
-# NLP-Based Interactive Decision Aids: Evaluating LLM Predictions on Political Tweets[cite: 3]
+# NLP-Based Interactive Decision Aids: Evaluating LLM Predictions on Political Tweets
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)[cite: 3]
-[![Google Colab](https://img.shields.io/badge/Google%20Colab-GPU-orange.svg)](https://colab.research.google.com/)[cite: 3]
-[![Hugging Face](https://img.shields.io/badge/Transformers-Hugging%20Face-yellow.svg)](https://huggingface.co/)[cite: 3]
-[![Pandas](https://img.shields.io/badge/Data%20Analysis-Pandas-green.svg)](https://pandas.pydata.org/)[cite: 3]
-[![Status](https://img.shields.io/badge/Status-Master%20Thesis%20Showcase-lightgrey.svg)]()[cite: 3]
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Google Colab](https://img.shields.io/badge/Google%20Colab-GPU-orange.svg)](https://colab.research.google.com/)
+[![Hugging Face](https://img.shields.io/badge/Transformers-Hugging%20Face-yellow.svg)](https://huggingface.co/)
+[![Pandas](https://img.shields.io/badge/Data%20Analysis-Pandas-green.svg)](https://pandas.pydata.org/)
+[![Status](https://img.shields.io/badge/Status-Master%20Thesis%20Showcase-lightgrey.svg)]()
 
-> **Portfolio Showcase:** This repository originates from my Master’s thesis in Business Administration (specializing in Marketing & Customer Insight) at the University of Hamburg. It demonstrates a complete end-to-end data analytics pipeline—ranging from web scraping unstructured social media data and advanced NLP preprocessing to model inference testing and critical performance evaluation.[cite: 3]
+> **Portfolio Showcase:** This repository originates from my Master’s thesis in Business Administration (specializing in Marketing & Customer Insight) at the University of Hamburg. It demonstrates a complete end-to-end data analytics pipeline—ranging from web scraping unstructured social media data and advanced NLP preprocessing to model inference testing and critical performance evaluation.
 
 ---
 
@@ -22,30 +22,30 @@ To bypass GitHub viewer limitations for Jupyter Notebooks, you can open and run 
 
 ---
 
-## 🎯 Background & Marketing Context (The "Why")[cite: 3]
+## 🎯 Background & Marketing Context (The "Why")
 
-Traditional decision aids in marketing (such as recommendation systems or attribute matrices) typically rely on structured product data and rigid questionnaires[cite: 3]. 
+Traditional decision aids in marketing (such as recommendation systems or attribute matrices) typically rely on structured product data and rigid questionnaires. 
 
-* **The Research Core:** Can modern Natural Language Processing (NLP) and Large Language Models be leveraged to create interactive decision aids where users express their preferences freely in their own words?[cite: 3]
-* **The Marketing Transfer:** Political communication represents one of the most complex choice environments[cite: 3]. Demonstrating how to analyze and structure unstructured political texts provides a methodological framework that translates directly to complex consumer decision-making in business (e.g., high-involvement financial services, automotive choices, or brand perception)[cite: 3].
+* **The Research Core:** Can modern Natural Language Processing (NLP) and Large Language Models be leveraged to create interactive decision aids where users express their preferences freely in their own words?
+* **The Marketing Transfer:** Political communication represents one of the most complex choice environments. Demonstrating how to analyze and structure unstructured political texts provides a methodological framework that translates directly to complex consumer decision-making in business (e.g., high-involvement financial services, automotive choices, or brand perception).
 
 ---
 
-## 🔄 Data Pipeline & Methodology[cite: 3]
+## 🔄 Data Pipeline & Methodology
 
-This project covers the full data analytics lifecycle[cite: 3]:
+This project covers the full data analytics lifecycle:
 
-1. **Data Collection & Scraping:**[cite: 3]
-   * Automated extraction of **30,000 raw tweets** from **421 members of the German Bundestag (MdB)** across the 6 major political parties (CDU/CSU, SPD, Grüne, FDP, Die Linke, AfD) over a 63-day period using `snscrape` and `selenium`[cite: 3].
-   * Automated scraping and regex mapping of politician profile bios to verify party affiliations[cite: 3].
+1. **Data Collection & Scraping:**
+   * Automated extraction of **30,000 raw tweets** from **421 members of the German Bundestag (MdB)** across the 6 major political parties (CDU/CSU, SPD, Grüne, FDP, Die Linke, AfD) over a 63-day period using `snscrape` and `selenium`.
+   * Automated scraping and regex mapping of politician profile bios to verify party affiliations.
 
-2. **Advanced NLP Preprocessing & Feature Engineering:**[cite: 3]
-   * **Hashtag Segmentation (`hashformers`):** Resolved compound social media hashtags (e.g., `#klimaschutzgesetz` $\rightarrow$ individual words) using GPT-2/BERT rerankers to retain thematic context without information loss[cite: 3]. *Note: As the original library lacked native TensorFlow support at the time, I successfully collaborated with the package maintainer to establish a dedicated TensorFlow branch for this project.*[cite: 3]
-   * **Text Cleaning:** Filtered out non-German tweets, duplicates, URLs, emojis, and short tweets ($<7$ words), reducing the dataset to **20,530 clean tweets**[cite: 3]. Explicitly retained stop words to preserve crucial negation structures for sentiment and polarity[cite: 3].
+2. **Advanced NLP Preprocessing & Feature Engineering:**
+   * **Hashtag Segmentation (`hashformers`):** Resolved compound social media hashtags (e.g., `#klimaschutzgesetz` $\rightarrow$ individual words) using GPT-2/BERT rerankers to retain thematic context without information loss. *Note: As the original library lacked native TensorFlow support at the time, I successfully collaborated with the package maintainer to establish a dedicated TensorFlow branch for this project.*
+   * **Text Cleaning:** Filtered out non-German tweets, duplicates, URLs, emojis, and short tweets ($<7$ words), reducing the dataset to **20,530 clean tweets**. Explicitly retained stop words to preserve crucial negation structures for sentiment and polarity.
 
-3. **Model Inference & Single-Label Prefix Transformation:**[cite: 3]
-   * Utilized pre-trained German Transformer architectures (`ELECTRA` / `BERT`) via Hugging Face[cite: 3].
-   * Transformed the dataset into single-label prefix formatting (evaluating each tweet against all 6 party prefixes), expanding the dataset to **123,180 evaluated instances**[cite: 3].
+3. **Model Inference & Single-Label Prefix Transformation:**
+   * Utilized pre-trained German Transformer architectures (`ELECTRA` / `BERT`) via Hugging Face.
+   * Transformed the dataset into single-label prefix formatting (evaluating each tweet against all 6 party prefixes), expanding the dataset to **123,180 evaluated instances**.
 
 #### Sample Final DataFrame Output
 The table below illustrates the transformed output structure, showing how a single input tweet is evaluated against candidate party prefixes to yield a predicted label, model confidence score, and sentiment:
@@ -54,7 +54,7 @@ The table below illustrates the transformed output structure, showing how a sing
 
 ---
 
-## 📊 Key Findings & Analytical Insights[cite: 3]
+## 📊 Key Findings & Analytical Insights
 
 ### 1. Classification Performance & Evaluation Metrics
 The combination of the confusion matrix and classification report provides a comprehensive view of the model's predictive behavior:
@@ -94,44 +94,44 @@ The histograms illustrate the absolute frequency distribution of prediction scor
 
 * **Histogram - Combined Scores (Label 0/1):**  
   ![Histogram Combined](assets/images/histogramm_label_1_0.JPG)  
-  * *Insight:* Roughly ~90,000 predictions reach the top confidence tier (>0.9), directly supporting the core finding of an average model confidence score of ~91%[cite: 3].
+  * *Insight:* Roughly ~90,000 predictions reach the top confidence tier (>0.9), directly supporting the core finding of an average model confidence score of ~91%.
 
 ---
 
 ### 3. Core Insights & Marketing Implications
-* **The Accuracy Paradox:** While the model achieved an overall accuracy of **28%** on hold-out data, deeper inspection revealed an average model confidence score of **~91%** across predictions[cite: 3].
-* **Content Analysis & Root Cause:** Wordclouds and descriptive statistics proved that the low classification accuracy was driven by the **nature of the data itself** rather than model failure: politician tweets frequently contained general, everyday conversation and lacked sharp ideological differentiation between parties[cite: 3].
-* **Marketing Implications:** The descriptive analysis revealed that politicians underutilized Twitter as a targeted communication and customer (voter) acquisition tool, often failing to establish clear brand differentiation[cite: 3].
+* **The Accuracy Paradox:** While the model achieved an overall accuracy of **28%** on hold-out data, deeper inspection revealed an average model confidence score of **~91%** across predictions.
+* **Content Analysis & Root Cause:** Wordclouds and descriptive statistics proved that the low classification accuracy was driven by the **nature of the data itself** rather than model failure: politician tweets frequently contained general, everyday conversation and lacked sharp ideological differentiation between parties.
+* **Marketing Implications:** The descriptive analysis revealed that politicians underutilized Twitter as a targeted communication and customer (voter) acquisition tool, often failing to establish clear brand differentiation.
 
 ---
 
-## 🚀 Key Takeaways for Practice[cite: 3]
+## 🚀 Key Takeaways for Practice
 
-This showcase highlights my ability to[cite: 3]:
-- Handle noisy, large-scale, unstructured web data and transform it into clean, analytics-ready structures[cite: 3].
-- Execute advanced text preprocessing techniques (regex, custom hashtag segmentation, language detection)[cite: 3].
-- Go beyond surface-level metrics: critically investigate model behavior, confidence scores, and data limitations rather than treating ML outputs as black boxes[cite: 3].
-- Bridge academic research with practical marketing analytics and strategic business insights[cite: 3].
-
----
-
-## 🛠 Tech Stack[cite: 3]
-
-* **Environment:** Google Colab (GPU)[cite: 3]
-* **Programming Language:** Python[cite: 3]
-* **Data Manipulation & Analysis:** Pandas, NumPy, Scikit-Learn[cite: 3]
-* **NLP & Model Testing:** Hugging Face Transformers, PyTorch/TensorFlow, Hashformers[cite: 3]
-* **Data Extraction & Web Scraping:** Selenium, BeautifulSoup, Snscrape[cite: 3]
-* **Version Control:** Git & GitHub[cite: 3]
+This showcase highlights my ability to:
+- Handle noisy, large-scale, unstructured web data and transform it into clean, analytics-ready structures.
+- Execute advanced text preprocessing techniques (regex, custom hashtag segmentation, language detection).
+- Go beyond surface-level metrics: critically investigate model behavior, confidence scores, and data limitations rather than treating ML outputs as black boxes.
+- Bridge academic research with practical marketing analytics and strategic business insights.
 
 ---
 
-## 📂 Repository Structure[cite: 3]
+## 🛠 Tech Stack
+
+* **Environment:** Google Colab (GPU)
+* **Programming Language:** Python
+* **Data Manipulation & Analysis:** Pandas, NumPy, Scikit-Learn
+* **NLP & Model Testing:** Hugging Face Transformers, PyTorch/TensorFlow, Hashformers
+* **Data Extraction & Web Scraping:** Selenium, BeautifulSoup, Snscrape
+* **Version Control:** Git & GitHub
+
+---
+
+## 📂 Repository Structure
 
 ```text
-├── assets/                # Assets folder for documentation and plots[cite: 3]
-│   └── images/            # JPG/PNG plots for README visualization[cite: 3]
-├── data/                  # Anonymized sample input schema and data structure[cite: 3]
-├── notebooks/             # Google Colab notebooks (Scraping, Preprocessing, Inference & Evaluation)[cite: 3]
-├── src/                   # Reusable Python scripts for scraping, cleaning & hashtag segmentation[cite: 3]
-└── README.md              # Project documentation[cite: 3]
+├── assets/                # Assets folder for documentation and plots
+│   └── images/            # JPG/PNG plots for README visualization
+├── data/                  # Anonymized sample input schema and data structure
+├── notebooks/             # Google Colab notebooks (Scraping, Preprocessing, Inference & Evaluation)
+├── src/                   # Reusable Python scripts for scraping, cleaning & hashtag segmentation
+└── README.md              # Project documentation
