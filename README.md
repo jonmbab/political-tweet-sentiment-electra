@@ -50,7 +50,7 @@ This project covers the full data analytics lifecycle[cite: 3]:
 #### Sample Final DataFrame Output
 The table below illustrates the transformed output structure, showing how a single input tweet is evaluated against candidate party prefixes to yield a predicted label, model confidence score, and sentiment:
 
-![Final DataFrame Sample](docs/images/final_dataframe.JPG)
+![Final DataFrame Sample](assets/images/final_dataframe.JPG)
 
 ---
 
@@ -60,10 +60,10 @@ The table below illustrates the transformed output structure, showing how a sing
 The combination of the confusion matrix and classification report provides a comprehensive view of the model's predictive behavior:
 
 * **Confusion Matrix:**  
-  ![Confusion Matrix](docs/images/confusion_matrix.JPG)
+  ![Confusion Matrix](assets/images/confusion_matrix.JPG)
 
 * **Classification Report:**  
-  ![Classification Report](docs/images/classification_report.JPG)
+  ![Classification Report](assets/images/classification_report.JPG)
 
 * **Quantitative Breakdown & Interpretation:**
   * **Class 0:** Precision of 0.17, Recall of 0.86, F1-Score of 0.28 (17,564 True Negatives, 2,966 False Positives).
@@ -77,23 +77,23 @@ The combination of the confusion matrix and classification report provides a com
 Despite the classification challenges reflected in the metrics, analyzing the model's prediction probabilities (scores) reveals extreme confidence patterns.
 
 #### Boxplots (Distribution per Party)
-* **Label 0 Scores:** ![Label 0 Boxplot](docs/images/boxplot_label_0.JPG) *(Medians remain extremely close to 1.0 across all parties, with minor lower outliers for AfD/Die Linke down to ~0.73)*
-* **Label 1 Scores:** ![Label 1 Boxplot](docs/images/boxplot_label_1.JPG) *(Wider spread with medians stable around 0.80 to 0.85)*
-* **Combined Scores:** ![Label 0/1 Boxplot](docs/images/boxplot_label_0_1.JPG)
+* **Label 0 Scores:** ![Label 0 Boxplot](assets/images/boxplot_label_0.JPG) *(Medians remain extremely close to 1.0 across all parties, with minor lower outliers for AfD/Die Linke down to ~0.73)*
+* **Label 1 Scores:** ![Label 1 Boxplot](assets/images/boxplot_label_1.JPG) *(Wider spread with medians stable around 0.80 to 0.85)*
+* **Combined Scores:** ![Label 0/1 Boxplot](assets/images/boxplot_label_0_1.JPG)
 
 #### Frequency Histograms (Overall Score Concentration)
 The histograms illustrate the absolute frequency distribution of prediction scores across bins, confirming the massive concentration of high confidence values:
 
 * **Histogram - Label 0 Scores:**  
-  ![Histogram Label 0](docs/images/histogramm_label_0.JPG)  
+  ![Histogram Label 0](assets/images/histogramm_label_0.JPG)  
   * *Insight:* The vast majority of Label 0 predictions cluster intensely in the highest confidence bin (0.9 to 1.0, representing ~80,000 instances).
 
 * **Histogram - Label 1 Scores:**  
-  ![Histogram Label 1](docs/images/histogramm_label_1.JPG)  
+  ![Histogram Label 1](assets/images/histogramm_label_1.JPG)  
   * *Insight:* Label 1 scores show a more balanced spread across lower confidence bins (0.5 to 0.9), while still peaking heavily in the 0.9–1.0 bin (~7,000+ instances).
 
 * **Histogram - Combined Scores (Label 0/1):**  
-  ![Histogram Combined](docs/images/histogramm_label_1_0.JPG)  
+  ![Histogram Combined](assets/images/histogramm_label_1_0.JPG)  
   * *Insight:* Roughly ~90,000 predictions reach the top confidence tier (>0.9), directly supporting the core finding of an average model confidence score of ~91%[cite: 3].
 
 ---
@@ -129,9 +129,9 @@ This showcase highlights my ability to[cite: 3]:
 ## 📂 Repository Structure[cite: 3]
 
 ```text
-├── data/                  # Anonymized sample input schema and data structure[cite: 3]
-├── docs/                  # Documentation and exported plots[cite: 3]
+├── assets/                # Assets folder for documentation and plots[cite: 3]
 │   └── images/            # JPG/PNG plots for README visualization[cite: 3]
+├── data/                  # Anonymized sample input schema and data structure[cite: 3]
 ├── notebooks/             # Google Colab notebooks (Scraping, Preprocessing, Inference & Evaluation)[cite: 3]
 ├── src/                   # Reusable Python scripts for scraping, cleaning & hashtag segmentation[cite: 3]
 └── README.md              # Project documentation[cite: 3]
