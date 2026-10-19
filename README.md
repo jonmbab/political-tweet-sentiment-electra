@@ -50,7 +50,16 @@ This project covers the full data analytics lifecycle:
 #### Sample Final DataFrame Output
 The table below illustrates the transformed output structure, showing how a single input tweet is evaluated against candidate party prefixes to yield a predicted label, model confidence score, and sentiment:
 
-![Final DataFrame Sample](assets/images/final_dataframe.JPG)
+| Username | Name | Party | Clean Text (Snippet) | Pred. Label | Score | Sentiment |
+| :--- | :--- | :--- | :--- | :---: | :---: | :---: |
+| BriHasselmann | Britta Haßelmann | Grüne | cdu/csu: Konsequent Handeln beim Klimaschutz h... | 1 | 0.617683 | negative |
+| BriHasselmann | Britta Haßelmann | Grüne | spd: Konsequent Handeln beim Klimaschutz heißt... | 0 | 0.999397 | positive |
+| BriHasselmann | Britta Haßelmann | Grüne | grüne: Konsequent Handeln beim Klimaschutz hei... | 0 | 0.999369 | positive |
+| BriHasselmann | Britta Haßelmann | Grüne | die linke: Konsequent Handeln beim Klimaschutz... | 0 | 0.999392 | positive |
+| BriHasselmann | Britta Haßelmann | Grüne | fdp: Konsequent Handeln beim Klimaschutz heißt... | 1 | 0.993188 | negative |
+| BriHasselmann | Britta Haßelmann | Grüne | afd: Konsequent Handeln beim Klimaschutz heißt... | 1 | 0.996538 | negative |
+
+*(👉 [View full DataFrame screenshot in assets/images](assets/images/final_dataframe.JPG))*
 
 ---
 
