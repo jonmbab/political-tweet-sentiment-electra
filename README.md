@@ -12,7 +12,7 @@
 
 ## 🚀 Interactive Notebooks (Google Colab)
 
-Um den GitHub-Viewer-Fehler bei Jupyter Notebooks zu umgehen, kannst du die Notebooks hier direkt per Klick in Google Colab öffnen und ausführen:
+To bypass GitHub viewer limitations for Jupyter Notebooks, you can open and run the notebooks directly in Google Colab via the links below:
 
 * **1. Data Scraping, Cleaning & Labeling:**  
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jonmbab/political-tweet-sentiment-electra/blob/main/notebooks/01_scraping_cleaning_and_labeling.ipynb)
@@ -43,15 +43,62 @@ This project covers the full data analytics lifecycle[cite: 3]:
    * **Hashtag Segmentation (`hashformers`):** Resolved compound social media hashtags (e.g., `#klimaschutzgesetz` $\rightarrow$ individual words) using GPT-2/BERT rerankers to retain thematic context without information loss[cite: 3]. *Note: As the original library lacked native TensorFlow support at the time, I successfully collaborated with the package maintainer to establish a dedicated TensorFlow branch for this project.*[cite: 3]
    * **Text Cleaning:** Filtered out non-German tweets, duplicates, URLs, emojis, and short tweets ($<7$ words), reducing the dataset to **20,530 clean tweets**[cite: 3]. Explicitly retained stop words to preserve crucial negation structures for sentiment and polarity[cite: 3].
 
-3. **Model Inference & Critical Evaluation:**[cite: 3]
+3. **Model Inference & Single-Label Prefix Transformation:**[cite: 3]
    * Utilized pre-trained German Transformer architectures (`ELECTRA` / `BERT`) via Hugging Face[cite: 3].
-   * Transformed the classification task using single-label prefix formatting (multiplying the dataset to 123,180 instances)[cite: 3].
-   * Conducted rigorous model evaluation using confusion matrices, classification reports, and **prediction score distributions** (analyzing model confidence via boxplots and histograms)[cite: 3].
+   * Transformed the dataset into single-label prefix formatting (evaluating each tweet against all 6 party prefixes), expanding the dataset to **123,180 evaluated instances**[cite: 3].
+
+#### Sample Final DataFrame Output
+The table below illustrates the transformed output structure, showing how a single input tweet is evaluated against candidate party prefixes to yield a predicted label, model confidence score, and sentiment:
+
+![Final DataFrame Sample](docs/images/final_dataframe.JPG)
 
 ---
 
 ## 📊 Key Findings & Analytical Insights[cite: 3]
 
+### 1. Classification Performance & Evaluation Metrics
+The combination of the confusion matrix and classification report provides a comprehensive view of the model's predictive behavior:
+
+* **Confusion Matrix:**  
+  ![Confusion Matrix](docs/images/confusion_matrix.JPG)
+
+* **Classification Report:**  
+  ![Classification Report](docs/images/classification_report.JPG)
+
+* **Quantitative Breakdown & Interpretation:**
+  * **Class 0:** Precision of 0.17, Recall of 0.86, F1-Score of 0.28 (17,564 True Negatives, 2,966 False Positives).
+  * **Class 1:** Precision of 0.85, Recall of 0.17, F1-Score of 0.28 (17,242 True Positives, 85,408 False Negatives).
+  * **Overall Accuracy:** 28% across 123,180 evaluated instances.
+  * **Insight:** The model exhibits a strong conservative bias toward predicting Class 0, resulting in a high false-negative rate for Class 1. This underlying imbalance is the root cause of the seemingly low accuracy metric.
+
+---
+
+### 2. Model Confidence & Score Distributions
+Despite the classification challenges reflected in the metrics, analyzing the model's prediction probabilities (scores) reveals extreme confidence patterns.
+
+#### Boxplots (Distribution per Party)
+* **Label 0 Scores:** ![Label 0 Boxplot](docs/images/boxplot_label_0.JPG) *(Medians remain extremely close to 1.0 across all parties, with minor lower outliers for AfD/Die Linke down to ~0.73)*
+* **Label 1 Scores:** ![Label 1 Boxplot](docs/images/boxplot_label_1.JPG) *(Wider spread with medians stable around 0.80 to 0.85)*
+* **Combined Scores:** ![Label 0/1 Boxplot](docs/images/boxplot_label_0_1.JPG)
+
+#### Frequency Histograms (Overall Score Concentration)
+The histograms illustrate the absolute frequency distribution of prediction scores across bins, confirming the massive concentration of high confidence values:
+
+* **Histogram - Label 0 Scores:**  
+  ![Histogram Label 0](docs/images/histogramm_label_0.JPG)  
+  * *Insight:* The vast majority of Label 0 predictions cluster intensely in the highest confidence bin (0.9 to 1.0, representing ~80,000 instances).
+
+* **Histogram - Label 1 Scores:**  
+  ![Histogram Label 1](docs/images/histogramm_label_1.JPG)  
+  * *Insight:* Label 1 scores show a more balanced spread across lower confidence bins (0.5 to 0.9), while still peaking heavily in the 0.9–1.0 bin (~7,000+ instances).
+
+* **Histogram - Combined Scores (Label 0/1):**  
+  ![Histogram Combined](docs/images/histogramm_label_1_0.JPG)  
+  * *Insight:* Roughly ~90,000 predictions reach the top confidence tier (>0.9), directly supporting the core finding of an average model confidence score of ~91%[cite: 3].
+
+---
+
+### 3. Core Insights & Marketing Implications
 * **The Accuracy Paradox:** While the model achieved an overall accuracy of **28%** on hold-out data, deeper inspection revealed an average model confidence score of **~91%** across predictions[cite: 3].
 * **Content Analysis & Root Cause:** Wordclouds and descriptive statistics proved that the low classification accuracy was driven by the **nature of the data itself** rather than model failure: politician tweets frequently contained general, everyday conversation and lacked sharp ideological differentiation between parties[cite: 3].
 * **Marketing Implications:** The descriptive analysis revealed that politicians underutilized Twitter as a targeted communication and customer (voter) acquisition tool, often failing to establish clear brand differentiation[cite: 3].
@@ -83,6 +130,8 @@ This showcase highlights my ability to[cite: 3]:
 
 ```text
 ├── data/                  # Anonymized sample input schema and data structure[cite: 3]
+├── docs/                  # Documentation and exported plots[cite: 3]
+│   └── images/            # JPG/PNG plots for README visualization[cite: 3]
 ├── notebooks/             # Google Colab notebooks (Scraping, Preprocessing, Inference & Evaluation)[cite: 3]
 ├── src/                   # Reusable Python scripts for scraping, cleaning & hashtag segmentation[cite: 3]
 └── README.md              # Project documentation[cite: 3]
